@@ -2,30 +2,37 @@ import React,{useState} from 'react'
 import AppContainer from '../../../layouts/AppContainer';
 import { Meteor } from 'meteor/meteor';
 import TextBox from '../../../components/basic/TextBox';
+import Dropdown from '../../../components/basic/Dropdown';
 import SimpleButton from '../../../components/basic/SimpleButton';
 import SubmitButton from '../../../components/basic/SubmitButton';
 import msg from '../../../../utils/msg';
 import Alert from 'react-s-alert';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Roles } from 'meteor/alanning:roles'
 
 function Profile({id, isPersonal=false,user}) {
 const [copyTextShow,setCopyTextShow] = useState(false);
+const userRoleValue = user&&user.roles&&user.roles["__global_roles__"]&&user.roles["__global_roles__"][0]||"";
+const [role,setRole] = useState(userRoleValue);
 
-const referrer = user ? Meteor.users.findOne({_id:user.profile.referralID}) : null;
-const referrals = Meteor.users.find({"profile.referralID":id}).fetch();
 
-const copyRLink = () => {
-    const copyText = document.getElementById("referLink");
-    copyText.select();
-    document.execCommand("copy");
-    setCopyTextShow(true);
-    setTimeout(()=>setCopyTextShow(false),1000);
-};
 const extraLabel = isPersonal?"Your ":"";
 const handleSubmit = (event) => {
   event.preventDefault();
 
   const fdata = new FormData(event.target);
+  Meteor.call('users.setPermission', {
+      id: id,
+      role: fdata.get("role")
+  }, (error) => {
+      // silent msg
+      if (error) {
+          msg(Alert.error, error.reason||"Assign user role failed");
+      } else {
+          
+          // msg(Alert.success, `Successfully assigned user role.`);
+      }
+  });
   Meteor.users.update(id, {
     $set: {
       profile: {
@@ -40,14 +47,13 @@ const handleSubmit = (event) => {
     if (!err){
       msg(Alert.success, `Profile updated.`);
     }else{
-      console.log(error);
-      msg(Alert.error, error.message);
+      console.log(err);
+      msg(Alert.error, err.reason||`Profile update failed.`);
     }
   }
   );
 
 };
-
 return (
   <AppContainer>
 <form onSubmit={handleSubmit} >
@@ -67,34 +73,17 @@ return (
   <div className="mb-4 text-left">
     <TextBox label="Address" name="address" value={user.profile.address} type="multiline" extraClass="h-32"/>
   </div>
-
-  <div className="mb-4 text-left flex justify-between">
-    <div>
-      <input id="referLink" type="text" className="border border-grey-light hover:border-grey px-2 py-2 rounded shadow" readOnly value={`${window.location.origin}/auth/register/${id}`}/>
-    <SimpleButton extraClass={"w-32 ml-3 "} onClick={copyRLink} bgColor="blue" whiteText={true} label={copyTextShow?"Copied!":"Copy Link"}/>
+  {
+    Roles.userIsInRole(Meteor.userId(), 'admins','.')  && (Meteor.users.find({"roles.__global_roles__":"admins"}).count> 1 || id !=Meteor.userId()) &&
+    <div className="mb-4 text-left">
+      <Dropdown name={"role"} options={{"admins":"admins","guest":"guest"}} selected={role} onChange={event=>setRole(event.target.value)}/>
     </div>
+  }
+  <div className="mb-4 text-left flex justify-end">
     <div>
     <SubmitButton label="Update" />
     </div>
   </div>
-  {
-    referrer &&
-    <div className="mb-4 text-left">
-      <label className="font-bold text-grey-darker block mb-2">Referred by:</label>
-      <span>{referrer.profile.name}</span>
-    </div>
-  }
-  {
-    referrals.length>0 &&
-    <div className="mb-4 text-left">
-      <label className="font-bold text-grey-darker block mb-2">{`${extraLabel}Referral:`}</label>
-      <ul>
-        {
-          referrals.map((elem,i)=><li key={i}>{elem.profile.name}</li>)
-        }
-      </ul>
-    </div>
-  }
 </div>
 :
 <span>Invalid User</span>

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import accounts from './accounts';
 import pub from './pub';
-import Leaves from '../imports/api/Leaves';
+import Posts from '../imports/api/Posts';
 
 Meteor.startup(() => {
 

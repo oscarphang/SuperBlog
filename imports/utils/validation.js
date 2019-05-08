@@ -13,6 +13,7 @@ export default validation ={
             return [false,err];
         }
         const user = Accounts.users.find({username:email}).fetch();
+        console.log(user);
         if (!isExistingEmail&&user.length>0){
             err="this email has been registered.";
             return [false,err];

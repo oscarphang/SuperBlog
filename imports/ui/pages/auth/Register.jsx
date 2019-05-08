@@ -12,8 +12,10 @@ import SubmitButton from '../../components/basic/SubmitButton';
 import validation from '../../../utils/validation';
 import History from '../../../startup/History';
 import {LOGIN} from './constants/path';
+import LoadingSpinner from '../../components/basic/LoadingSpinner';
 
 export default function Register({match}) {
+    const [isLoading,setIsLoading] = useState(false);
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -26,6 +28,7 @@ export default function Register({match}) {
 
         const fdata = new FormData(event.target);
         const emailUsername = fdata.get("email").toLowerCase();
+        setIsLoading(true);
         Accounts.createUser({
                 username: emailUsername,
                 email: emailUsername,
@@ -38,12 +41,25 @@ export default function Register({match}) {
             async function (err) {
                 console.log(err);
                 if (err) {
-                    msg(Alert.error, err);
+                    msg(Alert.error, err.reason||"Failed to register.");
                 } else {
                     msg(Alert.success, `Registered successfully`);
+                    Meteor.call('users.setDefaultPermission', {
+                        username: emailUsername
+                    }, (error) => {
+                        // silent msg
+                        if (error) {
+                            console.log(error);
+                            msg(Alert.error, error.reason||"Assign user role failed");
+                        } else {
+                            
+                            // msg(Alert.success, `Successfully assigned user role.`);
+                        }
+                    });
                     Meteor.call('users.sendVerify', {
                         username: emailUsername
                     }, (error, res) => {
+                        setIsLoading(false);
                         if (error) {
                             console.log(error);
                             msg(Alert.error, error.message);
@@ -81,6 +97,7 @@ export default function Register({match}) {
     const readyToSubmit = data.validEmail && data.validPassword && data.username !== "";
     return (       
     <AuthContainer header={"Register"} >
+        <LoadingSpinner isLoading={isLoading}/>
         <form onSubmit={handleSubmit} >
         <div className="mb-4">
                 <TextBox label={"Name"} name="name" placeholder={"Your Name"} value={data.username} onChange={value=>setData({...data,username:value})}/>

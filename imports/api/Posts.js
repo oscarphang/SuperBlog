@@ -1,15 +1,15 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const Leaves = new Mongo.Collection('leaves');
+const Posts = new Mongo.Collection('posts');
 
-Leaves.allow({
+Posts.allow({
   insert: () => false,
   update: () => false,
   remove: () => false,
 });
 
-Leaves.deny({
+Posts.deny({
   insert: () => true,
   update: () => true,
   remove: () => true,
@@ -44,6 +44,6 @@ const CollectionSchema = new SimpleSchema({
   }
 });
 
-Leaves.attachSchema(CollectionSchema);
+Posts.attachSchema(CollectionSchema);
 
-export default Leaves;
+export default Posts;

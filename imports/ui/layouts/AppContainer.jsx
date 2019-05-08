@@ -25,7 +25,7 @@ export default AppContainer = ({children}) => {
   return (
     <StrictMode>
       <div className="font-sans antialiased h-screen">
-        <TopBar companyName={"COMPANY"} />
+        <TopBar companyName={"SUPER DATA SCIENCE"} />
         
         
         <div id="main" className="pt-16">
