@@ -1,16 +1,16 @@
 import React,{useState} from 'react'
-import AppContainer from '../../layouts/AppContainer';
+import AppContainer from '../../../layouts/AppContainer';
 import { Meteor } from 'meteor/meteor';
-import TextBox from '../../components/basic/TextBox';
-import SimpleButton from '../../components/basic/SimpleButton';
-import SubmitButton from '../../components/basic/SubmitButton';
-import msg from '../../../utils/msg';
+import TextBox from '../../../components/basic/TextBox';
+import SimpleButton from '../../../components/basic/SimpleButton';
+import SubmitButton from '../../../components/basic/SubmitButton';
+import msg from '../../../../utils/msg';
 import Alert from 'react-s-alert';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default function Profile({match, isPersonal=false}) {
+function Profile({id, isPersonal=false,user}) {
 const [copyTextShow,setCopyTextShow] = useState(false);
-const id = match.params.id;
-const user = Meteor.users.findOne({_id:id});
+
 const referrer = user ? Meteor.users.findOne({_id:user.profile.referralID}) : null;
 const referrals = Meteor.users.find({"profile.referralID":id}).fetch();
 
@@ -108,3 +108,10 @@ return (
 )
 }
 
+export default withTracker(({id, isPersonal=false}) => {
+  return {
+    id,
+    isPersonal,
+    user: Meteor.users.findOne({_id:id}),
+  };
+})(Profile);

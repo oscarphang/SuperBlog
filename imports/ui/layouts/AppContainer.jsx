@@ -3,9 +3,6 @@ import TopBar from '../components/TopBar'
 import SideBar from '../components/SideBar'
 import { Meteor } from 'meteor/meteor';
 import History from '../../startup/History';
-import Profile from '../pages/users/Profile';
-import UserList from '../pages/users/UserList';
-import MyProfile from '../pages/users/MyProfile';
 import {LOGIN} from '../../ui/pages/auth/constants/path';
 import {Route } from 'react-router';
 

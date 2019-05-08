@@ -10,7 +10,8 @@ import msg from '../../../utils/msg';
 import TextBox from '../../components/basic/TextBox';
 import SubmitButton from '../../components/basic/SubmitButton';
 import validation from '../../../utils/validation';
-
+import History from '../../../startup/History';
+import {LOGIN} from './constants/path';
 
 export default function Register({match}) {
     const [data, setData] = useState({
@@ -48,6 +49,7 @@ export default function Register({match}) {
                             msg(Alert.error, error.message);
                         } else {
                             msg(Alert.success, `Verification email sent to your inbox.`);
+                            History.push(LOGIN);
                         }
                     });
                 }

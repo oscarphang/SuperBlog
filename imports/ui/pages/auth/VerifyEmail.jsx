@@ -9,11 +9,10 @@ export default function VerifyEmail({match}) {
     const token = match.params.token;
     Accounts.verifyEmail(token, function (error) {
         if (error){
-          msg(Alert.error,"Verification failed.")
+          msg(Alert.error,error.reason||"Verification failed.")
         }else{
           msg(Alert.success,"Verification successed, please login.")
         }
-        done();
     });
     History.push(LOGIN);
   return (
