@@ -1,17 +1,18 @@
 import React,{useEffect,useState} from 'react'
 import { Meteor } from 'meteor/meteor';
 import History from '../../../../startup/History';
-import {AFTER_LOGIN} from '../constants/path';
+import {RoutesMap} from '../../../../startup/AppRoute';
+import ForgotPassword from '../ForgotPassword';
+import Login from '../Login';
+import Register from '../Register';
+import ResetPassword from '../ResetPassword';
+import VerifyEmail from '../VerifyEmail';
 
 export default function AuthContainer({header,elemFooter=<></>,children}) {
   const [isUserLoggedIn,setIsUserLoggedIn] = useState(false);
 
-  useEffect(()=>{
-    setIsUserLoggedIn(Meteor.userId() && window.location.pathname.indexOf("/auth")!==-1);
-  },[]);
-
   if(isUserLoggedIn){
-    History.replace(AFTER_LOGIN);
+    History.replace(RoutesMap.get("AFTER_LOGIN"));
     return <></>;
   };
   return (

@@ -3,6 +3,11 @@ import SimpleSchema from 'simpl-schema';
 
 const Posts = new Mongo.Collection('posts');
 
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Meteor.publish('posts', ()=>Posts.find({}));
+}
+
 Posts.allow({
   insert: () => false,
   update: () => false,
@@ -16,31 +21,20 @@ Posts.deny({
 });
 
 const CollectionSchema = new SimpleSchema({
-  startDate: {
-    type: Date,
-    label: 'When the leave start.',
+  title: {
+    type: String,
+    label: 'Post title.',
   },
   endDate: {
-    type: Date,
-    label: 'When the leave end.',
-  },
-  appliedBy: {
     type: String,
+    label: 'Post description.',
   },
   createdAt: {
     type: Date
   },
-  remark: {
+  author: {
     type: String,
-    label: 'Description about the leave.',
-  },
-  approvedBy: {
-    type: String,
-  },
-  isApproved: {
-    type: Boolean,
-    label: 'show the leave is approved',
-    optional: true,
+    label: 'Author of the post.',
   }
 });
 

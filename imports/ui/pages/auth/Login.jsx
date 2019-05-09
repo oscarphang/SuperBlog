@@ -8,7 +8,9 @@ import { Meteor } from 'meteor/meteor'
 import msg from '../../../utils/msg';
 import History from '../../../startup/History';
 import LoadingSpinner from '../../components/basic/LoadingSpinner';
-import {AFTER_LOGIN} from './constants/path';
+import {RoutesMap} from '../../../startup/AppRoute';
+import Register from './Register';
+import ForgotPassword from './ForgotPassword';
 
 export default function Login() {
     const [login,setLogin] = useState({email:"",password:""});
@@ -23,7 +25,7 @@ export default function Login() {
             setIsLoading(false);
             if(!err){
                 msg(Alert.success,"login successfully");
-                History.push(AFTER_LOGIN);
+                History.push(RoutesMap.get("AFTER_LOGIN"));
             }else{
                 msg(Alert.error,"Wrong email or password");
             }
@@ -32,7 +34,7 @@ export default function Login() {
       };
 
     const footerBUtton = (<p className="text-grey-dark text-sm">Don't have an account? 
-    <Link className="no-underline text-blue font-bold" to="/auth/register">Create an Account</Link>.</p>);
+    <Link className="no-underline text-blue font-bold" to={RoutesMap.get(Register)}>Create an Account</Link>.</p>);
     const readyLogin = login.email!==""&&login.password!=="";
   return (
     <AuthContainer header={"Login"} elemFooter={footerBUtton}>
@@ -48,7 +50,7 @@ export default function Login() {
 
             <div className="flex items-center justify-between">
                 <SubmitButton label={'Login'} enable={readyLogin} />
-                <Link className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark float-right" to="/auth/forgot-password">Forgot Password?</Link>
+                <Link className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark float-right" to={RoutesMap.get(ForgotPassword)}>Forgot Password?</Link>
             </div>
         </form>
     </AuthContainer>

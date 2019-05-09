@@ -11,10 +11,11 @@ import TextBox from '../../components/basic/TextBox';
 import SubmitButton from '../../components/basic/SubmitButton';
 import validation from '../../../utils/validation';
 import History from '../../../startup/History';
-import {LOGIN} from './constants/path';
+import Login from './Login';
 import LoadingSpinner from '../../components/basic/LoadingSpinner';
+import {RoutesMap} from '../../../startup/AppRoute';
 
-export default function Register({match}) {
+export default function Register() {
     const [isLoading,setIsLoading] = useState(false);
     const [data, setData] = useState({
         email: "",
@@ -35,7 +36,6 @@ export default function Register({match}) {
                 password: fdata.get("password"),
                 profile: {
                     name: fdata.get("name"),
-                    referralID:match.params.token
                 }
             },
             async function (err) {
@@ -65,7 +65,7 @@ export default function Register({match}) {
                             msg(Alert.error, error.message);
                         } else {
                             msg(Alert.success, `Verification email sent to your inbox.`);
-                            History.push(LOGIN);
+                            History.push(RoutesMap.get(Login));
                         }
                     });
                 }

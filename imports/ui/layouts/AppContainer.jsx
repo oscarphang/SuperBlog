@@ -3,12 +3,13 @@ import TopBar from '../components/TopBar'
 import SideBar from '../components/SideBar'
 import { Meteor } from 'meteor/meteor';
 import History from '../../startup/History';
-import {LOGIN} from '../../ui/pages/auth/constants/path';
+import Login from '../pages/auth/Login';
+import {RoutesMap} from '../../startup/AppRoute';
 import {Route } from 'react-router';
 
 export default AppContainer = ({children}) => {
   if (!Meteor.user()){
-    History.replace(LOGIN);
+    History.replace(RoutesMap.get(Login));
     return <></>;
   }
   const menu = {
@@ -20,7 +21,7 @@ export default AppContainer = ({children}) => {
     ],
     "Maintenace":
     [
-      {"Users":`/users`}
+      {"Users":`/admin/users`}
     ]};
   return (
     <StrictMode>

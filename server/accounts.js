@@ -44,9 +44,9 @@ Meteor.users.allow({
   });
 
 Accounts.urls.resetPassword = (token) => {
-    return Meteor.absoluteUrl(`auth/reset-password/${token}`);
+    return Meteor.absoluteUrl(`reset-password/${token}`);
 };
 
 Accounts.urls.verifyEmail = (token) => {
-    return Meteor.absoluteUrl(`auth/verify-email/${token}`);
+    return Meteor.absoluteUrl(`verify-email/${token}`);
 };

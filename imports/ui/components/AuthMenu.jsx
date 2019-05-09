@@ -5,6 +5,8 @@ import History from '../../startup/History';
 import Alert from 'react-s-alert';
 import msg from '../../utils/msg';
 import {Link } from 'react-router-dom';
+import {RoutesMap} from '../../startup/AppRoute';
+import Login from '../pages/auth/Login';
 
 export default function AuthMenu() {
     const currentUser = Meteor.user();
@@ -14,7 +16,7 @@ export default function AuthMenu() {
         Meteor.logout(err=>{
             if (!err){
                 msg(Alert.success,"logout successfully");
-                History.push("/auth/login");
+                History.push(RoutesMap.get(Login));
             }else{
                 msg(Alert.error,"failed to logout");
             }

@@ -10,7 +10,8 @@ import SubmitButton from '../../components/basic/SubmitButton';
 import TextBox from '../../components/basic/TextBox';
 import Alert from 'react-s-alert';
 import History from '../../../startup/History';
-import {LOGIN} from './constants/path';
+import Login from './Login';
+import {RoutesMap} from '../../../startup/AppRoute';
 
 export default function ResetPassword({match}) {
     const token = match.params.token;
@@ -24,7 +25,7 @@ export default function ResetPassword({match}) {
         Accounts.resetPassword(token,fdata.get("password"), function(err){
             if (!err){
                 msg(Alert.success, "Password resetted, please use your new password to login.");
-                History.push(LOGIN);
+                History.push(RoutesMap.get(Login));
             }else{
                 msg(Alert.error, "Failed to reset password.");
             }
