@@ -5,7 +5,10 @@ import AppContainer from '../../layouts/AppContainer';
 
 export default function MyProfile() {
   return (
-    <Profile id={Meteor.userId()} isPersonal={true} />
+    <AppContainer>
+      <Profile id={Meteor.userId()} isPersonal={true} />
+    </AppContainer>
+    
     
   )
 }

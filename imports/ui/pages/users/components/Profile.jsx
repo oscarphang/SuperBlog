@@ -9,6 +9,9 @@ import msg from '../../../../utils/msg';
 import Alert from 'react-s-alert';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles'
+import History from '../../../../startup/History';
+import {RoutesMap} from '../../../../startup/AppRoute';
+import UserList from '../UserList';
 
 function Profile({id, isPersonal=false,user}) {
 const [copyTextShow,setCopyTextShow] = useState(false);
@@ -21,7 +24,8 @@ const handleSubmit = (event) => {
   event.preventDefault();
 
   const fdata = new FormData(event.target);
-  Meteor.call('users.setPermission', {
+  if (fdata.get("role")){
+    Meteor.call('users.setPermission', {
       id: id,
       role: fdata.get("role")
   }, (error) => {
@@ -33,6 +37,8 @@ const handleSubmit = (event) => {
           // msg(Alert.success, `Successfully assigned user role.`);
       }
   });
+  }
+  
   Meteor.users.update(id, {
     $set: {
       profile: {
@@ -46,6 +52,9 @@ const handleSubmit = (event) => {
   function(err){
     if (!err){
       msg(Alert.success, `Profile updated.`);
+      if (!isPersonal){
+        History.push(RoutesMap.get(UserList));
+      }
     }else{
       console.log(err);
       msg(Alert.error, err.reason||`Profile update failed.`);
@@ -55,7 +64,6 @@ const handleSubmit = (event) => {
 
 };
 return (
-  <AppContainer>
 <form onSubmit={handleSubmit} >
 
 <div className=" flex justify-center">
@@ -92,7 +100,6 @@ return (
 
 </div>
 </form>
-  </AppContainer>
   
 )
 }

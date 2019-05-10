@@ -13,10 +13,12 @@ export default function TableGen({data,colSeq,action=null}) {
     <table className="text-left w-full border-collapse">
       <thead>
         <tr>
-            {Object.entries(wihtoutIDData[0]).sort((a,b)=>colSeq.indexOf(a[0]) - colSeq.indexOf(b[0])).map(([key, value],i)=>(
+            {wihtoutIDData[0]?Object.entries(wihtoutIDData[0]).sort((a,b)=>colSeq.indexOf(a[0]) - colSeq.indexOf(b[0])).map(([key, value],i)=>(
                 <th key={i} className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{key}</th>
             )
-            )}
+            ):
+            colSeq.map((elem,i)=><th key={i} className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{elem}</th>)
+          }
             {
                 action&&
                 <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Action</th>
@@ -24,8 +26,8 @@ export default function TableGen({data,colSeq,action=null}) {
         </tr>
       </thead>
       <tbody>
-      {wihtoutIDData.map((elem,i)=>(
-           <tr key={i} className="hover:bg-grey-lighter">
+      {wihtoutIDData.length>0?wihtoutIDData.map((elem,i)=>(
+           <tr key={i} className="fade-in grow hover:bg-grey-lighter">
             {Object.entries(elem).sort((a,b)=>colSeq.indexOf(a[0]) - colSeq.indexOf(b[0])).map(([key, value],j)=>(
                 <td key={j} className="py-4 px-6 border-b border-grey-light">{value}</td>
             )
@@ -35,7 +37,14 @@ export default function TableGen({data,colSeq,action=null}) {
                 <td className="py-4 px-6 border-b border-grey-light">{action(data[i]["id"])}</td>
             }
          </tr>
-      ))}
+      )):
+      <tr className="hover:bg-grey-lighter">
+        <td className="text-grey-light text-center" colSpan={colSeq.length+(action==null?0:1)}>
+            {"No data available"}
+        </td>
+      </tr>
+          
+    }
       </tbody>
     </table>
   </div>

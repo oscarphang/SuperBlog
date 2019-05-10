@@ -1,11 +1,14 @@
 import React from 'react'
 import Profile from './components/Profile';
 import { Meteor } from 'meteor/meteor';
-import AppContainer from '../../layouts/AppContainer';
+import AdminContainer from '../../layouts/AdminContainer';
 
 export default function UserProfile({match}) {
   return (
-    <Profile id={match.params.id}  />
+    <AdminContainer>
+      <Profile id={match.params.id}  />
+    </AdminContainer>
+    
     
   )
 }

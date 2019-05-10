@@ -10,7 +10,7 @@ import Login from '../pages/auth/Login';
 
 export default function AuthMenu() {
     const currentUser = Meteor.user();
-    const {name} = currentUser.profile;
+    const {name} = currentUser?currentUser.profile:{name:""};
 
     const logOut = () =>{
         Meteor.logout(err=>{

@@ -179,3 +179,28 @@
   .effect-opacity{
     transition: opacity 0.5s ease-in-out;
   }
+
+  .fade-in {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+}
+
+.grow{
+  -webkit-animation:  grow-x 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation:  grow-x 1s; /* Firefox < 16 */
+   -ms-animation:  grow-x 1s; /* Internet Explorer */
+    -o-animation:  grow-x 1s; /* Opera < 12.1 */
+       animation:  grow-x 1s;
+}
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes grow-x {
+  from { height: 0%; }
+  to   { height: 100%; }
+}

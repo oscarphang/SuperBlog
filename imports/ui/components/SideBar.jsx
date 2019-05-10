@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import globalState from '../states/GlobalState';
 import SideBarItem from './SideBarItem';
+import {RoutesMap} from '../../startup/AppRoute';
 
 export default function SideBar({menuList}){
 
@@ -16,8 +17,9 @@ export default function SideBar({menuList}){
                 value.map((elem,i)=>{
                   const subElem = Object.entries(elem);
                   const [k,v]=subElem[0];
-
-                return <SideBarItem label={k} key={i} imgUrl={""} url={v}/>})
+                  const rawUrl = RoutesMap.get(v);
+                  const url = rawUrl?rawUrl.split(":")[0]:undefined;
+                return <SideBarItem label={k} key={i} imgUrl={""} url={url}/>})
               }
             </div>
           ))

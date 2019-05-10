@@ -2,8 +2,7 @@ import React,{useContext,useState} from 'react'
 import {Link } from 'react-router-dom';
 
 export default function SideBarItem({label,imgUrl,url="#"}) {
-
-    const isActive = url.indexOf(window.location.pathname)!==-1 ;
+    const isActive = window.location.pathname.indexOf(url)!==-1 ;
     const activeStyle = "border-blue-dark xl:bg-black bg-black xl:opacity-75";
     const inActiveStyle = "border-transparent hover:bg-black";
 

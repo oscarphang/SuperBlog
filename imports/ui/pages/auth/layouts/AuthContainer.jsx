@@ -7,15 +7,20 @@ import Login from '../Login';
 import Register from '../Register';
 import ResetPassword from '../ResetPassword';
 import VerifyEmail from '../VerifyEmail';
-
+import { Redirect } from 'react-router';
+import userState from '../../../../utils/userState';
 export default function AuthContainer({header,elemFooter=<></>,children}) {
   const [isUserLoggedIn,setIsUserLoggedIn] = useState(false);
+  console.log(userState());
+  useEffect(()=>{
+    
+    if (Meteor.userId()!==null){
+      setIsUserLoggedIn(true)
+    }
+  },[]);
 
-  if(isUserLoggedIn){
-    History.replace(RoutesMap.get("AFTER_LOGIN"));
-    return <></>;
-  };
   return (
+    !isUserLoggedIn?
     <div className="bg-grey-lighter h-screen font-sans">
     <div className="container mx-auto h-full flex justify-center items-center">
       <div className="w-1/3">
@@ -28,6 +33,6 @@ export default function AuthContainer({header,elemFooter=<></>,children}) {
           </div>
       </div>
   </div>
-  </div>
+  </div>: <Redirect to={RoutesMap.get("AFTER_LOGIN")} />
   )
 }
