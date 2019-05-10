@@ -39,7 +39,7 @@ export default function Register() {
                 }
             },
             async function (err) {
-                console.log(err);
+   
                 if (err) {
                     msg(Alert.error, err.reason||"Failed to register.");
                 } else {

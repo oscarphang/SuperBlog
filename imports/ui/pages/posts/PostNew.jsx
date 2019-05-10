@@ -12,7 +12,7 @@ export default function PostNew() {
         event.preventDefault();
 
         const fdata = new FormData(event.target);
-        console.log(Meteor.userId());
+
         Posts.insert({
             title: fdata.get("title"),
             description: fdata.get("description"),

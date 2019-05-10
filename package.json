@@ -1,5 +1,5 @@
 {
-  "name": "officeware",
+  "name": "superblog",
   "private": true,
   "scripts": {
     "start": "meteor run",

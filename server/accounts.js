@@ -28,7 +28,6 @@ Meteor.methods({
 }); 
 Meteor.methods({
     'users.setPermission'({ id,role }) {
-        console.log( id,role,Roles.userIsInRole(Meteor.userId(), 'admins','.'));
         if (Roles.userIsInRole(Meteor.userId(), 'admins','.')){
             Roles.setUserRoles(id, role, Roles.GLOBAL_GROUP)
         }else{

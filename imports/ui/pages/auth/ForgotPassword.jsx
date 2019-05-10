@@ -27,7 +27,7 @@ export default function ForgotPassword() {
       };
     const checkCurrentEmail = () =>{
         const [isValid, err] = validation.email(data.email,true);
-        console.log(isValid, err);
+
         msg(Alert.error, err);
         setData({
             ...data,
