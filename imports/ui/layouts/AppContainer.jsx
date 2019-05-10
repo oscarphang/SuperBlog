@@ -1,4 +1,4 @@
-import React,{StrictMode,useEffect,useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import TopBar from '../components/TopBar'
 import SideBar from '../components/SideBar'
 import { Meteor } from 'meteor/meteor';
@@ -7,10 +7,13 @@ import Login from '../pages/auth/Login';
 import {RoutesMap} from '../../startup/AppRoute';
 import UserList from '../pages/users/UserList';
 import PostList from '../pages/posts/PostList';
+import BlogHome from '../pages/blog/BlogHome';
 import { Roles } from 'meteor/alanning:roles'
 import { Redirect } from 'react-router';
 import userState,{tryReconnect} from '../../utils/userState';
 import LoadingSpinner from '../components/basic/LoadingSpinner';
+import Alert from 'react-s-alert';
+import msg from '../../utils/msg'
 
 export default AppContainer = ({children}) => {
   const [isLoading,setIsloading]=useState(true);
@@ -20,10 +23,13 @@ export default AppContainer = ({children}) => {
     tryReconnect.then(resUser=>{
       setUser(resUser);
       setIsloading(false);
+    },({message})=>{
+      msg(Alert.error,message);
+      return <Redirect to={RoutesMap.get(Login)} />
     })
     return <LoadingSpinner isLoading />
   }
-
+  
   const adminMenu = Roles.userIsInRole(user._id, 'admins','.')?{"Maintenace":
   [
     {"Posts":PostList},
@@ -32,13 +38,12 @@ export default AppContainer = ({children}) => {
   const menu = {
     "Main":
     [
-      {"Latest Posts":`/blog`},
+      {"Latest Posts":BlogHome},
     ],
     ...adminMenu
     };
   return (
-    <StrictMode>
-      <div className="font-sans antialiased h-screen">
+    <div className="font-sans antialiased h-screen">
         <TopBar companyName={"SUPER DATA SCIENCE"} />
         
         
@@ -52,6 +57,5 @@ export default AppContainer = ({children}) => {
         </div>
       </div>
     </div>
-    </StrictMode>
     )
 };

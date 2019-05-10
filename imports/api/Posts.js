@@ -29,6 +29,10 @@ const CollectionSchema = new SimpleSchema({
   createdAt: {
     type: Date
   },
+  imgUrl:{
+    type: String,
+    label: 'image url.',
+  },
   author: {
     type: Object,
     label: 'Author (name and id) of the post.',

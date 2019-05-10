@@ -2,10 +2,12 @@ import React,{useState} from 'react'
 import Posts from '../../../api/Posts';
 import History from '../../../startup/History';
 import PostList from './PostList';
+import msg from '../../../utils/msg';
 import Alert from 'react-s-alert';
 import PostDetail from './components/PostDetail';
 import {RoutesMap} from '../../../startup/AppRoute';
-
+import { Redirect } from 'react-router';
+import PostNew from './PostNew';
 import {
     Meteor
 } from 'meteor/meteor';
@@ -26,8 +28,8 @@ function PostEdit({
             $set: {
                 title: fdata.get("title"),
                 description: fdata.get("description"),
+                imgUrl: fdata.get("image-url"),
                 author: {name:Meteor.user().profile.name,id:Meteor.userId()},
-                createdAt:id?post.createdAt:new Date()
             }
         } , function (err) {
             if (!err) {

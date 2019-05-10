@@ -8,10 +8,8 @@ import Register from '../Register';
 import ResetPassword from '../ResetPassword';
 import VerifyEmail from '../VerifyEmail';
 import { Redirect } from 'react-router';
-import userState from '../../../../utils/userState';
 export default function AuthContainer({header,elemFooter=<></>,children}) {
   const [isUserLoggedIn,setIsUserLoggedIn] = useState(false);
-  console.log(userState());
   useEffect(()=>{
     
     if (Meteor.userId()!==null){

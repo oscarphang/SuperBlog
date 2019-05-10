@@ -15,11 +15,16 @@ import ResetPassword from '../ui/pages/auth/ResetPassword';
 import PostList from '../ui/pages/posts/PostList';
 import PostEdit from '../ui/pages/posts/PostEdit';
 import PostNew from '../ui/pages/posts/PostNew';
+import BlogHome from '../ui/pages/blog/BlogHome';
+import BlogRead from '../ui/pages/blog/BlogRead';
+
 import { Roles } from 'meteor/alanning:roles'
 import { Meteor } from 'meteor/meteor';
 
 export const RoutesMap = new Map([
-  [PostNew,'/admin/posts/create'],
+  [BlogRead,'/blog/:id'],
+  [BlogHome,'/blog'],
+  [PostNew,'/admin/posts-create'],
   [PostEdit,'/admin/posts/:id'],
   [PostList,'/admin/posts'],
   [UserProfile,'/admin/users/:id'],
@@ -31,7 +36,7 @@ export const RoutesMap = new Map([
   [Register,'/signup'],
   [Login,'/login'],
   [PermissionDenied,'/permission-denied'],
-  ["AFTER_LOGIN",'/my-profile'],
+  ["AFTER_LOGIN",'/blog'],
 ]);
 
 const ComponentRoute = (component) => <Route exact path={RoutesMap.get(component)} component={component}/>;
@@ -39,6 +44,10 @@ const ComponentRoute = (component) => <Route exact path={RoutesMap.get(component
 export const AppRoute = () => (
   <Router history={History}>
     <Switch>
+      //blog
+      {ComponentRoute(BlogHome)}
+      {ComponentRoute(BlogRead)}
+
       //auth
       <Redirect exact path="/" to={RoutesMap.get(Login)}></Redirect>
       {ComponentRoute(ResetPassword)}

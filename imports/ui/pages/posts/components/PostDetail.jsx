@@ -4,7 +4,7 @@ import SubmitButton from '../../../components/basic/SubmitButton';
 import AdminContainer from '../../../layouts/AdminContainer';
 
 export default function PostDetail({
-    post={title:"",description:""},
+    post={title:"",description:"",imgUrl:""},
     handleSubmit=undefined,
     actionLabel
 }) {
@@ -19,6 +19,10 @@ export default function PostDetail({
           </div>
           <div className="mb-4 text-left">
             <TextBox label="Description" name="description" value={post.description} type="multiline" extraClass="h-32"/>
+          </div>
+          <div className="mb-4 text-left">
+            <TextBox label="Cover Image" name="image-url" placeholder={"Please upload it and paste the image URL here"} value={post.imgUrl} />
+            <label className="text-grey">recommended to put an image to attract user to view it.</label>
           </div>
           <div className="mb-4 text-left flex justify-end">
             <div>

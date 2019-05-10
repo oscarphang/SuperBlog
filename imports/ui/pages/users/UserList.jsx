@@ -11,7 +11,7 @@ import UserProfile from '../users/UserProfile';
 function UserList({users}) {
   const tableData = users.map(elem=>({"id":elem._id,"Username":elem.username,"Name":elem.profile.name}));
   
-  const actionButton = id =>(<><Link to={`${RoutesMap.get(UserProfile).replace(":id","")}${id}`} className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">Edit</Link></>);
+  const actionButton = id =>(<><Link to={`${RoutesMap.get(UserProfile).replace(":id","")}${id}`} className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"><i className="far fa-edit"/></Link></>);
   return (
     <AdminContainer>
       <TableGen data={tableData} colSeq={["Username","Name"]} action={actionButton}/>
