@@ -22,6 +22,7 @@ function BlogHome({posts}) {
 }
 
 export default withTracker(() => {
+    
     Meteor.subscribe('posts');
     return {
         posts: Posts.find({}, { sort: { createdAt: -1 } }).fetch(),

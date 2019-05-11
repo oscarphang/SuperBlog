@@ -18,11 +18,14 @@ export default function AdminContainer({children}) {
 
     if (isLoading){
       tryReconnect.then(resUser=>{
-        setUser(resUser);
-        setIsloading(false);
-      },({message})=>{
-        msg(Alert.error,message);
-        History.push(RoutesMap.get(Login));
+        if (resUser){
+          setUser(resUser);
+          setIsloading(false);
+        }else{
+          msg(Alert.error,);
+          History.push(RoutesMap.get(Login));
+        }
+        
       });
       
       return <LoadingSpinner isLoading />
@@ -31,7 +34,7 @@ export default function AdminContainer({children}) {
   return (
     
     <AppContainer>
-        {Roles.userIsInRole(user._id, 'admins','.')?<>{children}</>:<PermissionDenied/> }
+        {Roles.userIsInRole(Meteor.userId(), 'admins','.')?<>{children}</>:<PermissionDenied/> }
     </AppContainer>
   )
 }

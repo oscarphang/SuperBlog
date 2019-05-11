@@ -10,6 +10,7 @@ import PostList from '../pages/posts/PostList';
 import BlogHome from '../pages/blog/BlogHome';
 import { Roles } from 'meteor/alanning:roles'
 import { Redirect } from 'react-router';
+import PermissionDenied from '../pages/auth/PermissionDenied';
 import userState,{tryReconnect} from '../../utils/userState';
 import LoadingSpinner from '../components/basic/LoadingSpinner';
 import Alert from 'react-s-alert';
@@ -21,16 +22,17 @@ export default AppContainer = ({children}) => {
 
   if (isLoading){
     tryReconnect.then(resUser=>{
-      setUser(resUser);
-      setIsloading(false);
-    },({message})=>{
-      msg(Alert.error,message);
-      return <Redirect to={RoutesMap.get(Login)} />
+      if (resUser){
+        setUser(resUser);
+        setIsloading(false);
+      }else{
+        msg(Alert.error,"Unauthorised user");
+        History.push(RoutesMap.get(Login));
+      }
     })
     return <LoadingSpinner isLoading />
   }
-  
-  const adminMenu = Roles.userIsInRole(user._id, 'admins','.')?{"Maintenace":
+  const adminMenu = Roles.userIsInRole(Meteor.userId(), 'admins','.')?{"Maintenace":
   [
     {"Posts":PostList},
     {"Users":UserList}
@@ -42,7 +44,7 @@ export default AppContainer = ({children}) => {
     ],
     ...adminMenu
     };
-  return (
+  return  Roles.userIsInRole(Meteor.userId(), ['guest','admins'],'.')?
     <div className="font-sans antialiased h-screen">
         <TopBar companyName={"SUPER DATA SCIENCE"} />
         
@@ -57,5 +59,6 @@ export default AppContainer = ({children}) => {
         </div>
       </div>
     </div>
-    )
+    : <PermissionDenied/>;
+    
 };

@@ -16,13 +16,17 @@ const wait = ms => new Promise((r, j)=>setTimeout(r, ms));
 export const tryReconnect = new Promise(async (resolve,reject) =>{
     let attemptTimes = 3;
     let _user = null;
-    if (window.location.pathname=="/login"){
+
+    const safePath =['/login','/','/reset-password/','/verify-email/','/signup'];
+
+    if (safePath.some(elem=>window.location.pathname.includes(elem))){
         resolve({});
         return;
     }
     while (attemptTimes--){
         await wait(2000);
         console.log("try reconnecting");
+
         const [user,isLoading] =userState();
         if (!isLoading){
             console.log("connected");
@@ -33,7 +37,7 @@ export const tryReconnect = new Promise(async (resolve,reject) =>{
     if (_user){
         resolve(_user);
     }else{
-        reject(Error("Unauthorised user."));
+        resolve(undefined);
     }
     
 });
