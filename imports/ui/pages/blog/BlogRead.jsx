@@ -29,7 +29,7 @@ export default function BlogRead({match}) {
             <p className="text-sm md:text-base font-normal text-grey-dark"><i className="far fa-clock mr-2"></i>{moment(post.createdAt).fromNow()}</p>
           </div>
 
-            <p className="py-6">
+            <p className="py-6 whitespace-pre">
               {post.description}
             </p>
 
