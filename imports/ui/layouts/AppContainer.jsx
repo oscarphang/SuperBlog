@@ -11,26 +11,21 @@ import BlogHome from '../pages/blog/BlogHome';
 import { Roles } from 'meteor/alanning:roles'
 import { Redirect } from 'react-router';
 import PermissionDenied from '../pages/auth/PermissionDenied';
-import userState,{tryReconnect} from '../../utils/userState';
+import useMeteorUser from '../../utils/userState';
 import LoadingSpinner from '../components/basic/LoadingSpinner';
 import Alert from 'react-s-alert';
 import msg from '../../utils/msg'
 
 export default AppContainer = ({children}) => {
-  const [isLoading,setIsloading]=useState(true);
-  const [user,setUser]=useState(null);
+  const [isLoading,user]=useMeteorUser();
 
   if (isLoading){
-    tryReconnect.then(resUser=>{
-      if (resUser){
-        setUser(resUser);
-        setIsloading(false);
-      }else{
-        msg(Alert.error,"Unauthorised user");
-        History.push(RoutesMap.get(Login));
-      }
-    })
     return <LoadingSpinner isLoading />
+  }else{
+    if (!user){
+      msg(Alert.error,"Unauthorised user");
+      History.push(RoutesMap.get(Login));
+    }
   }
   const adminMenu = Roles.userIsInRole(Meteor.userId(), 'admins','.')?{"Maintenace":
   [

@@ -19,11 +19,11 @@ export default function AuthContainer({header,elemFooter=<></>,children}) {
 
   return (
     !isUserLoggedIn?
-    <div className="bg-grey-lighter h-screen font-sans">
+    <div className="bg-grey-lighter h-screen font-sans ">
     <div className="container mx-auto h-full flex justify-center items-center">
       <div className="w-1/3">
           <h1 className="font-hairline mb-6 text-center">{header}</h1>
-          <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
+          <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg fade-in">
               {children}
           </div>
           <div className="text-center">

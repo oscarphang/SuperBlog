@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import {useState} from 'react';
 
 const userState= () =>{
     //return [user,isLoading]
@@ -41,4 +42,19 @@ export const tryReconnect = new Promise(async (resolve,reject) =>{
     }
     
 });
-export default userState;
+
+const useMeteorUser = () =>{
+    const [isLoading,setIsloading]=useState(true);
+    const [user,setUser]=useState(undefined);
+
+    if (isLoading){
+      tryReconnect.then(resUser=>{
+        setUser(resUser);
+        setIsloading(false);
+      });
+      
+      
+    }
+    return [isLoading,user];
+}
+export default useMeteorUser;
