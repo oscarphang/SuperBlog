@@ -27,7 +27,7 @@ export default function TableGen({data,colSeq,action=null}) {
       </thead>
       <tbody>
       {wihtoutIDData.length>0?wihtoutIDData.map((elem,i)=>(
-           <tr key={i} className="fade-in grow hover:bg-grey-lighter">
+           <tr key={i} className="hover:bg-grey-lighter">
             {Object.entries(elem).sort((a,b)=>colSeq.indexOf(a[0]) - colSeq.indexOf(b[0])).map(([key, value],j)=>(
                 <td key={j} className="py-4 px-6 border-b border-grey-light">{value}</td>
             )

@@ -18,7 +18,7 @@ export default function BlogRead({match}) {
 
   return (
     <AppContainer>
-      <div className="container w-full md:max-w-md mx-auto pt-20">
+      <div className="container w-full md:max-w-md mx-auto pt-20 animate-content">
           
           <div className="w-full px-4 md:px-6 text-xl text-grey-darkest leading-normal text-left" style={{fontFamily:"Georgia,serif"}}>
         
@@ -29,7 +29,7 @@ export default function BlogRead({match}) {
             <p className="text-sm md:text-base font-normal text-grey-dark"><i className="far fa-clock mr-2"></i>{moment(post.createdAt).fromNow()}</p>
           </div>
 
-            <p className="py-6 whitespace-pre">
+            <p className="py-6 whitespace-pre-wrap">
               {post.description}
             </p>
 

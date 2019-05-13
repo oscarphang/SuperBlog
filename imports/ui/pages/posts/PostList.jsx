@@ -12,8 +12,9 @@ import PostNew from './PostNew';
 import History from '../../../startup/History';
 import msg from '../../../utils/msg';
 import Alert from 'react-s-alert';
+import LoadingSpinner from '../../components/basic/LoadingSpinner';
 
-function PostList({posts}) {
+function PostList({posts,isLoading}) {
     const tableData = posts.map(elem=>({"id":elem._id,"Title":elem.title,"Created Date":moment(elem.createdAt).format("L"),"Author":elem.author.name}));
     const confirmDelete = id =>{
       if(window.confirm('Delete the item?')){
@@ -35,20 +36,21 @@ function PostList({posts}) {
     </>);
   return (
     <AdminContainer>
-        <div>
+        {isLoading?<LoadingSpinner isLoading/> :<div>
             <div className="w-2/3 mx-auto flex justify-end">
             <Link to={`${RoutesMap.get(PostNew)}`} className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">Create</Link>
             </div>
         <TableGen data={tableData} colSeq={["Title","Created Date","Author"]} action={actionButton}/>
-        </div>
+        </div>}
       
     </AdminContainer>
   )
 }
 
 export default withTracker(() => {
-    Meteor.subscribe('posts');
+  const {ready} = Meteor.subscribe('posts');
     return {
         posts: Posts.find({}).fetch(),
+        isLoading: !ready()
     };
   })(PostList);
