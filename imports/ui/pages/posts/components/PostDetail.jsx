@@ -22,7 +22,7 @@ export default function PostDetail({
           </div>
           <div className="mb-4 text-left">
             <TextBox label="Cover Image" name="image-url" placeholder={"Please upload it and paste the image URL here"} value={post.imgUrl} />
-            <label className="text-grey">recommended to put an image to attract user to view it.</label>
+            <label className="text-gray-500">recommended to put an image to attract user to view it.</label>
           </div>
           <div className="mb-4 text-left flex justify-end">
             <div>

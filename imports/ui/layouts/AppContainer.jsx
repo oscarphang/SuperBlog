@@ -21,11 +21,6 @@ export default AppContainer = ({children}) => {
 
   if (isLoading){
     return <LoadingSpinner isLoading />
-  }else{
-    if (!user){
-      msg(Alert.error,"Unauthorised user");
-      History.push(RoutesMap.get(Login));
-    }
   }
   const adminMenu = Roles.userIsInRole(Meteor.userId(), 'admins','.')?{"Maintenace":
   [
@@ -40,15 +35,15 @@ export default AppContainer = ({children}) => {
     ...adminMenu
     };
   return  Roles.userIsInRole(Meteor.userId(), ['guest','admins'],'.')?
-    <div className="font-sans antialiased h-screen">
+    <div className="font-sans antialiased h-screen ">
         <TopBar companyName={"SUPER DATA SCIENCE"} />
         
         
-        <div id="main" className="pt-16">
+        <div id="main" className="pt-16 ">
       
           <SideBar menuList={menu} />
-          <div className="bg-grey-lighter h-full pt-8">
-            <div className="text-center w-full text-grey-darkest">
+          <div className="bg-gray-200 h-full pt-8">
+            <div className="text-center w-full text-gray-800">
             {children}
           </div>
         </div>

@@ -3,6 +3,7 @@ import {useState} from 'react';
 
 const userState= () =>{
     //return [user,isLoading]
+    console.log(Meteor.user());
     if (Meteor.user() == undefined){
         return [undefined,true]
     }
@@ -38,7 +39,7 @@ export const tryReconnect = new Promise(async (resolve,reject) =>{
     if (_user){
         resolve(_user);
     }else{
-        resolve(undefined);
+        resolve(null);
     }
     
 });

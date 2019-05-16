@@ -30,7 +30,7 @@ function PostList({posts,isLoading}) {
       }
     }
     const actionButton = id =>(<>
-    {/* <Link to={`${RoutesMap.get(PostEdit).replace(":id","")}${id}`} className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded h-16"><i className="far fa-edit"></i></Link> */}
+    {/* <Link to={`${RoutesMap.get(PostEdit).replace(":id","")}${id}`} className="bg-blue hover:bg-blue-600 text-white font-bold py-2 px-4 rounded h-16"><i className="far fa-edit"></i></Link> */}
     <SimpleButton label={<i className="far fa-edit"/>} whiteText bgColor="blue" extraClass="h-10" onClick={()=>History.push(`${RoutesMap.get(PostEdit).replace(":id","")}${id}`)}/>
     <SimpleButton label={<i className="far fa-trash-alt"/>} whiteText bgColor="red" extraClass="h-10" onClick={()=>confirmDelete(id)}/>
     </>);
@@ -38,7 +38,7 @@ function PostList({posts,isLoading}) {
     <AdminContainer>
         {isLoading?<LoadingSpinner isLoading/> :<div>
             <div className="w-2/3 mx-auto flex justify-end">
-            <Link to={`${RoutesMap.get(PostNew)}`} className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">Create</Link>
+            <Link to={`${RoutesMap.get(PostNew)}`} className="bg-blue hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create</Link>
             </div>
         <TableGen data={tableData} colSeq={["Title","Created Date","Author"]} action={actionButton}/>
         </div>}

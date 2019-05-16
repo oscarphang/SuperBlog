@@ -17,11 +17,6 @@ export default function AdminContainer({children}) {
 
     if (isLoading){
       return <LoadingSpinner isLoading />
-    }else{
-      if (!user){
-        msg(Alert.error,"Unauthorised user");
-        History.push(RoutesMap.get(Login));
-      }
     }
 
   return (

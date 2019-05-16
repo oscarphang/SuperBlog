@@ -14,32 +14,32 @@ export default function TableGen({data,colSeq,action=null}) {
       <thead>
         <tr>
             {wihtoutIDData[0]?Object.entries(wihtoutIDData[0]).sort((a,b)=>colSeq.indexOf(a[0]) - colSeq.indexOf(b[0])).map(([key, value],i)=>(
-                <th key={i} className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{key}</th>
+                <th key={i} className="py-4 px-6 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-400">{key}</th>
             )
             ):
-            colSeq.map((elem,i)=><th key={i} className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{elem}</th>)
+            colSeq.map((elem,i)=><th key={i} className="py-4 px-6 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-400">{elem}</th>)
           }
             {
                 action&&
-                <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Action</th>
+                <th className="py-4 px-6 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-400">Action</th>
             }
         </tr>
       </thead>
       <tbody>
       {wihtoutIDData.length>0?wihtoutIDData.map((elem,i)=>(
-           <tr key={i} className="hover:bg-grey-lighter">
+           <tr key={i} className="hover:bg-gray-200">
             {Object.entries(elem).sort((a,b)=>colSeq.indexOf(a[0]) - colSeq.indexOf(b[0])).map(([key, value],j)=>(
-                <td key={j} className="py-4 px-6 border-b border-grey-light">{value}</td>
+                <td key={j} className="py-4 px-6 border-b border-gray-400">{value}</td>
             )
             )}
             {
                 action&&
-                <td className="py-4 px-6 border-b border-grey-light">{action(data[i]["id"])}</td>
+                <td className="py-4 px-6 border-b border-gray-400">{action(data[i]["id"])}</td>
             }
          </tr>
       )):
-      <tr className="hover:bg-grey-lighter">
-        <td className="text-grey-light text-center" colSpan={colSeq.length+(action==null?0:1)}>
+      <tr className="hover:bg-gray-200">
+        <td className="text-gray-400 text-center" colSpan={colSeq.length+(action==null?0:1)}>
             {"No data available"}
         </td>
       </tr>

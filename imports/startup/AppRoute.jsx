@@ -33,6 +33,7 @@ export const RoutesMap = new Map([
   [ResetPassword,'/reset-password/:token'],
   [ForgotPassword,'/forgot-password'],
   [VerifyEmail,'/verify-email/:token'],
+  ["REFERRAL_REGISTER",'/signup/:token'],
   [Register,'/signup'],
   [Login,'/login'],
   [PermissionDenied,'/permission-denied'],

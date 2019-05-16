@@ -26,13 +26,13 @@ export default function AuthMenu() {
     <div className="group relative h-full">
         {
             <>
-            <a href="#" className="text-white flex items-center h-full bg-grey-darkest px-4">
+            <a href="#" className="text-white flex items-center h-full bg-gray-800 px-4">
                 {name}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="h-6 w-6 text-grey-darker fill-current ml-1"><path className="heroicon-ui" d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="h-6 w-6 text-gray-700 fill-current ml-1"><path className="heroicon-ui" d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>
             </a>
-            <div className="hidden group-hover:block absolute pin-r top-full w-48 bg-black">
-                <Link className="block text-left py-3 px-3 text-white hover:text-blue-dark text-xs" to="/my-profile">My Account</Link>
-                <a href="#" onClick={logOut} className="block text-left py-3 px-3 text-white hover:text-blue-dark text-xs">
+            <div className="hidden group-hover:block absolute right-0 top-full w-48 bg-gray-900">
+                <Link className="block text-left py-3 px-3 text-white hover:text-blue-600 text-xs" to="/my-profile">My Account</Link>
+                <a href="#" onClick={logOut} className="block text-left py-3 px-3 text-white hover:text-blue-600 text-xs">
                     Logout
                 </a>
             </div>

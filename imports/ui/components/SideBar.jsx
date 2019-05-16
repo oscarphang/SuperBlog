@@ -6,11 +6,11 @@ import {RoutesMap} from '../../startup/AppRoute';
 export default function SideBar({menuList}){
 
     return (
-        <div className="bg-grey-darkest relative h-full min-h-screen">
+        <div className="bg-gray-800 relative h-full min-h-screen">
         {
           Object.entries(menuList).map(([key, value]) =>(
             <div className="xl:py-2" key={key}>
-              <div className="hidden xl:block uppercase font-bold text-grey-darker text-xs px-4 py-2">
+              <div className="hidden xl:block uppercase font-bold text-gray-700 text-xs px-4 py-2">
                 {key}
               </div>
               {

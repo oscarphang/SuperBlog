@@ -33,8 +33,8 @@ export default function Login() {
         
       };
 
-    const footerBUtton = (<p className="text-grey-dark text-sm">Don't have an account? 
-    <Link className="no-underline text-blue font-bold" to={RoutesMap.get(Register)}>Create an Account</Link>.</p>);
+    const footerBUtton = (<p className="text-gray-600 text-sm">Don't have an account? 
+    <Link className="no-underline text-blue-500 hover:underline font-bold" to={RoutesMap.get(Register)}>Create an Account</Link>.</p>);
     const readyLogin = login.email!==""&&login.password!=="";
   return (
     <AuthContainer header={"Login"} elemFooter={footerBUtton}>
@@ -50,7 +50,7 @@ export default function Login() {
 
             <div className="flex items-center justify-between">
                 <SubmitButton label={'Login'} enable={readyLogin} />
-                <Link className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark float-right" to={RoutesMap.get(ForgotPassword)}>Forgot Password?</Link>
+                <Link className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-600 float-right" to={RoutesMap.get(ForgotPassword)}>Forgot Password?</Link>
             </div>
         </form>
     </AuthContainer>

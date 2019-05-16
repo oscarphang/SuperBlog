@@ -16,6 +16,9 @@ Posts.allow({
   remove: () => Roles.userIsInRole(Meteor.userId(), 'admins','.'),
 });
 
+Posts.before.insert(function (userId, doc) {
+  doc.createdAt = new Date();
+});
 
 const CollectionSchema = new SimpleSchema({
   title: {

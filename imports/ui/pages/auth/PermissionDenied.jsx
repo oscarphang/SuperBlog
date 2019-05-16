@@ -8,7 +8,7 @@ export default function PermissionDenied() {
 
   useEffect(()=>{
     let intvl = setInterval(function(){ 
-      if (timer == 0){
+      if (timer == 1){
         History.push(RoutesMap.get(Login));
       }else{
         setTimer(timer-1); 
@@ -17,9 +17,12 @@ export default function PermissionDenied() {
     return ()=>{ clearInterval(intvl)}
   });
   return (
-    <div className="fade-in bg-grey-lighter h-screen flex content-center justify-center">
-         <span className="self-center text-5xl text-teal-dark">Permission Denied 🙅‍♂️️</span>
-          <span>{`Redirecting in ${timer} seconds`}</span>
+    <div className="fade-in bg-gray-200 h-screen flex content-center justify-center">
+      <div className="self-center">
+          <span className="text-5xl text-teal-600 block">Permission Denied 🙅‍♂️️</span>
+          <span className="block">{`Redirecting in ${timer} seconds`}</span>
+      </div>
+         
         </div>
   )
 }

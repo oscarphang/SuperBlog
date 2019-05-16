@@ -16,21 +16,21 @@ export default function TextBox({label,extraClass="",placeholder="",name,value="
     let bgColor = "white";
     if (value!==""&&valid!==null){
         if (valid){
-            bgColor="green-lightest";
+            bgColor="green-100";
         }else{
-            bgColor="red-lighter";
+            bgColor="red-200";
         }
     }
 
   return (
     <>
-    <label className="font-bold text-grey-darker block mb-2">{label}</label>
+    <label className="font-bold text-gray-700 block mb-2">{label}</label>
     {
         type=="multiline"?
-        <textarea className={`${extraClass} block appearance-none w-full bg-${bgColor} border border-grey-light hover:border-grey px-2 py-2 rounded shadow`}  
+        <textarea className={`${extraClass} block appearance-none w-full bg-${bgColor} border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow`}  
         name={name} placeholder={placeholder||`Please enter ${label}`} onChange={event=>_onChange(event)} onBlur={_onBlur} value={val}></textarea>
         :
-        <input type={type} className={`${extraClass} block appearance-none w-full bg-${bgColor} border border-grey-light hover:border-grey px-2 py-2 rounded shadow`} 
+        <input type={type} className={`${extraClass} block appearance-none w-full bg-${bgColor} border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow`} 
         placeholder={placeholder||`Please enter ${label}`} name={name} value={val} onChange={event=>_onChange(event)} onBlur={_onBlur}/>
     }
     </>

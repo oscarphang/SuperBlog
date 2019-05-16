@@ -17,8 +17,7 @@ export default function PostNew() {
             title: fdata.get("title"),
             description: fdata.get("description"),
             imgUrl: fdata.get("image-url"),
-            author: {name:Meteor.user().profile.name,id:Meteor.userId()},
-            createdAt:new Date()
+            author: {name:Meteor.user().profile.name,id:Meteor.userId()}
         },function (err) {
             if (!err) {
                 msg(Alert.success, "Post inserted.");

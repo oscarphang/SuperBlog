@@ -9,9 +9,9 @@ export default function SimpleButton({label,extraClass="",whiteText=false,bgColo
             onClick();
         }
     }
-    const [color1,color2]=!invertHoverColor?[`bg-${bgColor}-dark`,`hover:bg-${bgColor}`]:[`bg-${bgColor}`,`hover:bg-${bgColor}-dark`];
+    const [color1,color2]=!invertHoverColor?[`bg-${bgColor}-600`,`hover:bg-${bgColor}-500`]:[`bg-${bgColor}-500`,`hover:bg-${bgColor}-600`];
   return (
-    <button className={`${extraClass} ${whiteText?"text-white":""} ${enable?`${color1} ${color2}`:"bg-grey-dark cursor-not-allowed"} font-bold py-2 px-4 rounded`} 
+    <button className={`${extraClass} ${whiteText?"text-white":""} ${enable?`${color1} ${color2}`:"bg-gray-600 cursor-not-allowed"} font-bold py-2 px-4 rounded`} 
     type="submit" value="Submit" disabled={!enable} onClick={_onClick} disabled={!enable} >
         {label}
     </button>

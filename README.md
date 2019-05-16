@@ -1,4 +1,4 @@
-# SuperBlog
+# OfficeWare
 
 to run this app, run "meteor"
 

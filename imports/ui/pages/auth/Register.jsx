@@ -15,7 +15,7 @@ import Login from './Login';
 import LoadingSpinner from '../../components/basic/LoadingSpinner';
 import {RoutesMap} from '../../../startup/AppRoute';
 
-export default function Register() {
+export default function Register({match}) {
     const [isLoading,setIsLoading] = useState(false);
     const [data, setData] = useState({
         email: "",
@@ -36,6 +36,7 @@ export default function Register() {
                 password: fdata.get("password"),
                 profile: {
                     name: fdata.get("name"),
+                    referralID:match.params.token
                 }
             },
             async function (err) {
@@ -44,18 +45,6 @@ export default function Register() {
                     msg(Alert.error, err.reason||"Failed to register.");
                 } else {
                     msg(Alert.success, `Registered successfully`);
-                    Meteor.call('users.setDefaultPermission', {
-                        username: emailUsername
-                    }, (error) => {
-                        // silent msg
-                        if (error) {
-                            console.log(error);
-                            msg(Alert.error, error.reason||"Assign user role failed");
-                        } else {
-                            
-                            // msg(Alert.success, `Successfully assigned user role.`);
-                        }
-                    });
                     Meteor.call('users.sendVerify', {
                         username: emailUsername
                     }, (error, res) => {
