@@ -38,7 +38,7 @@ function PostList({posts,isLoading}) {
     <AdminContainer>
         {isLoading?<LoadingSpinner isLoading/> :<div>
             <div className="w-2/3 mx-auto flex justify-end">
-            <Link to={`${RoutesMap.get(PostNew)}`} className="bg-blue hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create</Link>
+            <Link to={`${RoutesMap.get(PostNew)}`} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create</Link>
             </div>
         <TableGen data={tableData} colSeq={["Title","Created Date","Author"]} action={actionButton}/>
         </div>}

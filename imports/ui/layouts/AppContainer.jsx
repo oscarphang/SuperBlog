@@ -36,7 +36,7 @@ export default AppContainer = ({children}) => {
     };
   return  Roles.userIsInRole(Meteor.userId(), ['guest','admins'],'.')?
     <div className="font-sans antialiased h-screen ">
-        <TopBar companyName={"SUPER DATA SCIENCE"} />
+        <TopBar companyName={"COMPANY"} />
         
         
         <div id="main" className="pt-16 ">
